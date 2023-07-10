@@ -1,0 +1,6 @@
+.gradle/
+build/
+lib/
+.idea/
+libs/
+target/
