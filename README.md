@@ -25,7 +25,7 @@
 
 ## 怎么用?
 
-直接 `mvn package assembly:single` 构建就可以了.  
+直接 `mvn package` 构建就可以了.  
 生成的 `dbeaver-agent.jar` 放到任何你喜欢的地方
 
 > 但还是推荐放到安装目录

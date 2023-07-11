@@ -76,41 +76,36 @@
                 </configuration>
             </plugin>
             <plugin>
-                <!-- Building an executable jar -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!-- give full qualified name of your main class-->
-                            <mainClass>dev.misakacloud.dbee.Agent</mainClass>
-                        </manifest>
-                    </archive>
-                    <excludes>
-                        <exclude>**/org/jkiss/**</exclude>
-                        <exclude>**/com/dbeaver/**</exclude>
-                        <exclude>**/research/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>dev.misakacloud.dbee.Agent</mainClass>
-                        </manifest>
-                    </archive>
                     <descriptorRefs>
-                        <descriptorRef>
-                            jar-with-dependencies
-                        </descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Premain-Class>dev.misakacloud.dbee.Agent</Premain-Class>
+                            <Boot-Class-Path>${artifactId}.jar</Boot-Class-Path>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-
     </build>
 </project>

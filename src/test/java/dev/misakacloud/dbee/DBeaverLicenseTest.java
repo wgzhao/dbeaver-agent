@@ -20,6 +20,49 @@ import java.util.Date;
 
 public class DBeaverLicenseTest {
     @Test
+    public void genEnterpriseLicense() throws Exception {
+        PrivateKey privateKey = (PrivateKey) new MyCryptKey().getPrivateKey();
+        // 需要注意的是,这里 id 是不一样的 终极版叫 dbeaver-ue
+        LMProduct product = new LMProduct("dbeaver-ee",
+                "DB",
+                "DBeaver Enterprise Edition",
+                "DBeaver Enterprise Edition",
+                "23",
+                LMProductType.DESKTOP,
+                new Date(),
+                new String[0]);
+        String licenseID = LMUtils.generateLicenseId(product);
+        String productID = product.getId();
+        String productVersion = product.getVersion();
+        String ownerID = "080601";
+        String ownerCompany = "wgzhao.com";
+        String ownerName = "wgzhao";
+        String ownerEmail = "wgzhao@gmail.com";
+        LMLicense license = new LMLicense(licenseID,
+                LMLicenseType.ULTIMATE,
+                new Date(),
+                new Date(),
+                // 这样子就是没有到期
+                null,
+                0L,
+                productID,
+                productVersion,
+                ownerID,
+                ownerCompany,
+                ownerName,
+                ownerEmail);
+        // 反射修改 yearsNumber 用来修改支持年份
+        Field yearsNumberField = license.getClass().getDeclaredField("yearsNumber");
+        yearsNumberField.setAccessible(true);
+        yearsNumberField.set(license, (byte) 127);
+        byte[] licenseData = license.getData();
+        byte[] licenseEncrypted = LMEncryption.encrypt(licenseData, privateKey);
+        System.out.println("--- LICENSE ---");
+        System.out.println(Base64.getEncoder().encodeToString(licenseEncrypted));
+        System.out.println("--- 请复制上文 (不包括这一行) ---");
+    }
+
+    @Test
     public void genLiteLicense() throws Exception {
         PrivateKey privateKey = (PrivateKey) new MyCryptKey().getPrivateKey();
         // 需要注意的是,这里 id 是不一样的 终极版叫 dbeaver-ue
@@ -61,6 +104,7 @@ public class DBeaverLicenseTest {
         System.out.println(Base64.getEncoder().encodeToString(licenseEncrypted));
         System.out.println("--- 请复制上文 (不包括这一行) ---");
     }
+
     @Test
     public void genUltimateLicense() throws Exception {
         PrivateKey privateKey = (PrivateKey) new MyCryptKey().getPrivateKey();
