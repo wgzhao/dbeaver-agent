@@ -54,7 +54,7 @@ public class Agent {
                 // 指定需要拦截的类
                 //.type(ElementMatchers.nameContains("com.dbeaver.ee.runtime.lm.DBeaverEnterpriseLM"))
 //                .type(ElementMatchers.nameContains("com.dbeaver.lm.embedded.LicenseServiceEmbedded"))
-                .type(ElementMatchers.nameContains("com.dbeaver.lm.embedded.LicenseServiceEmbedded$LicenseKeyProvider").and(ElementMatchers.isStatic()))
+                .type(ElementMatchers.nameContains("com.dbeaver.model.license.embedded.LicenseKeyProviderEmbedded"))
                 .transform((builder, type, classLoader, module) -> builder
                         .method(ElementMatchers.named("getDecryptionKey"))
                         .intercept(MethodDelegation.to(LoadKeyInterceptor.class)))
@@ -68,7 +68,7 @@ public class Agent {
         new AgentBuilder
                 .Default()
                 // 指定需要拦截的类
-                .type(ElementMatchers.nameContains("com.dbeaver.lm.validate.PublicLicenseValidator"))
+                .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicLicenseValidator"))
                 .transform((builder, type, classLoader, module) -> builder
                         .method(ElementMatchers.named("validateLicense"))
                         .intercept(MethodDelegation.to(PublicLicenseValidatorInterceptor.class)))
@@ -79,7 +79,7 @@ public class Agent {
         new AgentBuilder
                 .Default()
                 // 指定需要拦截的类
-                .type(ElementMatchers.nameContains("com.dbeaver.lm.validate.PublicServiceClient"))
+                .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicServiceClient"))
                 .transform((builder, type, classLoader, module) -> builder
                         .method(ElementMatchers.named("ping"))
                         .intercept(MethodDelegation.to(PingCheckInterceptor.class))

@@ -2,12 +2,12 @@ package dev.misakacloud.dbee;
 
 import dev.misakacloud.dbee.utils.MyCryptKey;
 import dev.misakacloud.dbee.utils.OriginalCryptKey;
-import org.jkiss.lm.LMEncryption;
-import org.jkiss.lm.LMLicense;
-import org.jkiss.lm.LMLicenseType;
-import org.jkiss.lm.LMProduct;
-import org.jkiss.lm.LMProductType;
-import org.jkiss.lm.LMUtils;
+import com.dbeaver.lm.api.LMEncryption;
+import com.dbeaver.lm.api.LMLicense;
+import com.dbeaver.lm.api.LMLicenseType;
+import com.dbeaver.lm.api.LMProduct;
+import com.dbeaver.lm.api.LMProductType;
+import com.dbeaver.lm.api.LMUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -21,13 +21,14 @@ import java.util.Date;
 public class DBeaverLicenseTest {
     @Test
     public void genEnterpriseLicense() throws Exception {
-        PrivateKey privateKey = (PrivateKey) new MyCryptKey().getPrivateKey();
+        MyCryptKey myCryptKey = new MyCryptKey();
+        PrivateKey privateKey = (PrivateKey) myCryptKey.getPrivateKey();
         // 需要注意的是,这里 id 是不一样的 终极版叫 dbeaver-ue
         LMProduct product = new LMProduct("dbeaver-ee",
                 "DB",
+                "DBeaver Enterprise 24.0",
                 "DBeaver Enterprise Edition",
-                "DBeaver Enterprise Edition",
-                "23",
+                "24",
                 LMProductType.DESKTOP,
                 new Date(),
                 new String[0]);
@@ -35,9 +36,9 @@ public class DBeaverLicenseTest {
         String productID = product.getId();
         String productVersion = product.getVersion();
         String ownerID = "080601";
-        String ownerCompany = "wgzhao.com";
-        String ownerName = "wgzhao";
-        String ownerEmail = "wgzhao@gmail.com";
+        String ownerCompany = "example.com";
+        String ownerName = "owner";
+        String ownerEmail = "owner@example.com";
         LMLicense license = new LMLicense(licenseID,
                 LMLicenseType.ULTIMATE,
                 new Date(),
@@ -60,6 +61,7 @@ public class DBeaverLicenseTest {
         System.out.println("--- LICENSE ---");
         System.out.println(Base64.getEncoder().encodeToString(licenseEncrypted));
         System.out.println("--- 请复制上文 (不包括这一行) ---");
+        LMEncryption.decrypt(licenseEncrypted, myCryptKey.getPublicKey());
     }
 
     @Test
@@ -70,7 +72,7 @@ public class DBeaverLicenseTest {
                 "DB",
                 "DBeaver Lite",
                 "DBeaver Lite Edition",
-                "23",
+                "24",
                 LMProductType.DESKTOP,
                 new Date(),
                 new String[0]);
@@ -78,9 +80,9 @@ public class DBeaverLicenseTest {
         String productID = product.getId();
         String productVersion = product.getVersion();
         String ownerID = "114514";
-        String ownerCompany = "我的公司";
-        String ownerName = "公司法人";
-        String ownerEmail = "company@company.com";
+        String ownerCompany = "owner";
+        String ownerName = "owner";
+        String ownerEmail = "owner@example.com";
         LMLicense license = new LMLicense(licenseID,
                 LMLicenseType.ULTIMATE,
                 new Date(),
@@ -113,7 +115,7 @@ public class DBeaverLicenseTest {
                                           "DB",
                                           "DBeaver Enterprise",
                                           "DBeaver Ultimate Edition",
-                                          "21",
+                                          "24",
                                           LMProductType.DESKTOP,
                                           new Date(),
                                           new String[0]);
@@ -121,9 +123,9 @@ public class DBeaverLicenseTest {
         String productID = product.getId();
         String productVersion = product.getVersion();
         String ownerID = "114514";
-        String ownerCompany = "下北泽";
-        String ownerName = "WHO Cares";
-        String ownerEmail = "example@example.com";
+        String ownerCompany = "owner";
+        String ownerName = "owner";
+        String ownerEmail = "owner@example.com";
         LMLicense license = new LMLicense(licenseID,
                                           LMLicenseType.ULTIMATE,
                                           new Date(),
@@ -155,7 +157,7 @@ public class DBeaverLicenseTest {
                 "8EWhdiuxPOJdHTR01waJUvb4RdH8Ldi2m2CNB93sv1OTMvzoDX1oWUnWGN8mL7K0UU+3ksy06a0O\n" +
                 "/AU8wueD1yaXHQp9OML5WmBDZapiuSKoQUH/dPhu6C7XRj1EAiTueNibb9rSfbhlUYKgA/1is4nW\n" +
                 "42xwiN3+jzQrBYO1NQIYAlGHxlsJ0+IxqVLHCw==";
-        PublicKey oldPublicKey = (PublicKey) new OriginalCryptKey().getDBeaverUePublicKey();
+        PublicKey oldPublicKey = (PublicKey) new OriginalCryptKey().getDBeaverEePublicKey();
         InputStream is = new ByteArrayInputStream(encryptedLicense.getBytes());
         byte[] encryptedLicenseBytes = LMUtils.readEncryptedString(is);
         LMLicense license = new LMLicense(encryptedLicenseBytes, oldPublicKey);

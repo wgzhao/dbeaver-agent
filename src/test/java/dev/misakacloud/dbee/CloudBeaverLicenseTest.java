@@ -1,8 +1,13 @@
 package dev.misakacloud.dbee;
 
+import com.dbeaver.lm.api.LMEncryption;
+import com.dbeaver.lm.api.LMLicense;
+import com.dbeaver.lm.api.LMProduct;
+import com.dbeaver.lm.api.LMProductType;
+import com.dbeaver.lm.api.LMLicenseType;
+import com.dbeaver.lm.api.LMUtils;
 import dev.misakacloud.dbee.utils.MyCryptKey;
 import dev.misakacloud.dbee.utils.OriginalCryptKey;
-import org.jkiss.lm.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -22,7 +27,7 @@ public class CloudBeaverLicenseTest {
                                           "DB",
                                           "CloudBeaver Enterprise",
                                           "CloudBeaver Enterprise Edition",
-                                          "21",
+                                          "24",
                                           LMProductType.SERVER,
                                           new Date(),
                                           new String[0]);
@@ -30,9 +35,9 @@ public class CloudBeaverLicenseTest {
         String productID = product.getId();
         String productVersion = product.getVersion();
         String ownerID = "114514";
-        String ownerCompany = "无";
-        String ownerName = "Null or None";
-        String ownerEmail = "example@example.com";
+        String ownerCompany = "owner";
+        String ownerName = "owner";
+        String ownerEmail = "owner@example.com";
         LMLicense license = new LMLicense(licenseID,
                                           LMLicenseType.ULTIMATE,
                                           new Date(),

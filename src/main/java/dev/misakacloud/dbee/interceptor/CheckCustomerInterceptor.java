@@ -10,7 +10,6 @@ import java.util.concurrent.Callable;
 public class CheckCustomerInterceptor {
     @RuntimeType
     public static Object intercept(@Origin Method method, @SuperCall Callable<?> callable) throws Exception {
-        String response = "";
-        return response;
+        return "";
     }
 }

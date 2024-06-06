@@ -16,6 +16,15 @@ public class OriginalCryptKey {
             "i82UiC5zIk75dx20Al9ql0fdxnzo31q/2MbnNCAfSchsqrKtzBtheex4JvvqZjxn98wk5Te1QgZz\n" +
             "Caz4ay9dkLVjSt79QYm5hKb8Jt3O5SxSUsrjmYVeG+k2bQlidw8dENwLZmvJkIJi8kb94yEwY/dq\n" +
             "lENDkQIDAQAB";
+
+    public static String DBEAVER_EE_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk7ciFU" +
+            "/aUCIgH5flBbGD0t7B3KOmfL0l\n" +
+            "BMf2ENuLA0w/T8A1RvteUYk2EQo3UrZ7kMZ8rK93nmDjituN7jlv/bsxGyAox87BbKYSs9oH5f9P\n" +
+            "hYHAiTE0PxoMODnl4NgR+Bpc+Ath8wDLHMC+BzYkOy4JQo8EX/ff58TT9UYP8eoDeGdSxQmW3FJC\n" +
+            "i82UiC5zIk75dx20Al9ql0fdxnzo31q/2MbnNCAfSchsqrKtzBtheex4JvvqZjxn98wk5Te1QgZz\n" +
+            "Caz4ay9dkLVjSt79QYm5hKb8Jt3O5SxSUsrjmYVeG+k2bQlidw8dENwLZmvJkIJi8kb94yEwY/dq\n" +
+            "lENDkQIDAQAB";
+
     public static String CLOUDBEAVER_EE_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlAiyH9ghPpqATx" +
             "/FtCV2o5y6UKDFR+4c\n" +
             "LjvztuYyvfb161hrrtkcmLkBJUNfJQbG6y+yE6tJCoFPplobU7ztqIvWQchQbSyDCDyWeeob8SY5\n" +
@@ -25,12 +34,15 @@ public class OriginalCryptKey {
             "F7jNpwIDAQAB";
 
     public byte[] localDBeaverUeKeyBytes;
+    public byte[] localDBeaverEeKeyBytes;
     public byte[] localCloudBeaverEeKeyBytes;
 
 
     public OriginalCryptKey() throws Exception {
         String dBeaverUePublicKeyStr = DBEAVER_UE_PUBLIC_KEY.replaceAll("\\n", "").trim();
-        this.localDBeaverUeKeyBytes = Base64.getDecoder().decode(dBeaverUePublicKeyStr.getBytes());   
+        this.localDBeaverUeKeyBytes = Base64.getDecoder().decode(dBeaverUePublicKeyStr.getBytes());
+        String dBeaverEePublicKeyStr = DBEAVER_EE_PUBLIC_KEY.replaceAll("\\n", "").trim();
+        this.localDBeaverEeKeyBytes = Base64.getDecoder().decode(dBeaverEePublicKeyStr.getBytes());
         String cloudBeaverEePublicKeyStr = CLOUDBEAVER_EE_PUBLIC_KEY.replaceAll("\\n", "").trim();
         this.localCloudBeaverEeKeyBytes = Base64.getDecoder().decode(cloudBeaverEePublicKeyStr.getBytes());
     }
@@ -45,7 +57,19 @@ public class OriginalCryptKey {
             e.printStackTrace();
         }
         return null;
-    }  
+    }
+
+    public Key getDBeaverEePublicKey() {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(localDBeaverEeKeyBytes);
+            return keyFactory.generatePublic(publicKeySpec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Key getCloudBeaverEePublicKey() {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
