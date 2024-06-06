@@ -43,6 +43,34 @@ plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
 
 > 对于 DBeaver >= 24 需要自备 Java17
 
+## 生成密钥
+
+现已支持命令行生成密钥，运行方式如下：
+
+```shell
+java -cp libs/\*:./target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar \
+    dev.misakacloud.dbee.License
+```
+默认生成的密钥是针对 `Dbeaver Enterprise Edition 24.0`，如果需要其他类型的密钥，可以使用下面的参数来指定
+
+```shell
+java -cp libs/\*:./target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar \
+    dev.misakacloud.dbee.License -h
+
+Usage: gen-license [-h] [-p=<productName>] [-t=<licenseType>]
+                   [-v=<productVersion>]
+Generate DBeaver license
+  -h, --help
+  -p, --product=<productName>
+                             Product name, you can choose dbeaver or
+                               cloudbeaver, default is dbeaver
+  -t, --type=<licenseType>   License type, you can choose Lite version(le),
+                               Enterprise version(ee) or Ultimate version(ue)
+                               default is ue
+  -v, --version=<productVersion>
+                             Product version, default is 24
+```
+
 ## 支持版本
 
 下列是已经测试过的版本:
