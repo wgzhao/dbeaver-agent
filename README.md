@@ -1,11 +1,15 @@
-# DBeaver Agent for 24.0
+# DBeaver Agent for 24.x
 
-该说明针对 `24.0` 版本，其他低版本可以参考 `master` 分支
+该分支该针对 `24.x` 版本，其他低版本可以参考 `master` 分支
 
+## 支持的版本
+
+- `24.0.x`
+- `24.1.x`
 
 ## 依赖
 
-由于单元测试使用了来自 DBeaver 的代码,所以你需要准备好 DBeaver 的一些包  
+由于单元测试使用了来自 DBeaver 的代码,所以你需要准备好 DBeaver 的一些包
 把下列的包放入到 libs 文件夹
 
 - `com.dbeaver.ee.runtime` 基础运行时,获取密钥等信息在里面
@@ -16,13 +20,13 @@
 
 ## 怎么用?
 
-直接 `mvn package` 构建就可以了.  
+直接 `mvn package` 构建就可以了.
 生成的 `dbeaver-agent.jar` 放到任何你喜欢的地方
 
 > 但还是推荐放到安装目录
 
-修改 DBeaver 安装目录的 `dbeaver.ini` 给他加点参数  
-在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}`  
+修改 DBeaver 安装目录的 `dbeaver.ini` 给他加点参数
+在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}`
 就像这样
 
 ```ini
@@ -70,9 +74,3 @@ Generate DBeaver license
   -v, --version=<productVersion>
                              Product version, default is 24
 ```
-
-## 支持版本
-
-下列是已经测试过的版本:
-
-- 24.0.0
