@@ -1,3 +1,5 @@
+[English](README-EN.md)
+
 # DBeaver Agent for 24.x
 
 该分支该针对 `24.x` 版本，其他低版本可以参考 `master` 分支
