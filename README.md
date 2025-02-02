@@ -24,8 +24,13 @@
 
 ## 怎么用?
 
-直接 `mvn package` 构建就可以了.
-生成的 `dbeaver-agent.jar` 放到任何你喜欢的地方
+首先执行 `mvn package` 来构建项目，生成 `target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar` 文件
+
+然后将生成的 `dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar` 放到任何你喜欢的地方（比如 `/usr/share/dbeaver/dbeaver-agent.jar`）
+
+```shell
+cp target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+```
 
 > 但还是推荐放到安装目录
 
@@ -48,9 +53,9 @@ plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
 -Xmx2048m
 ```
 
-然后呢,需要删掉 DBeaver 自带的 jre 就好了
+最后，删除 DBeaver 自带的 jre 文件夹， 如果你系统默认的 JRE 就是 17 的话，且能在系统路径中找到，那就不用做其他操作。否则你需要把你安装的 JRE 17 拷贝到 DBeaver 安装目录下，和它自带的 jre 文件夹同级。
+如果是非 Windows 系统，你也可以采取软链接的方式。
 
-> 对于 DBeaver >= 24 需要自备 Java17
 
 ## 生成密钥
 
@@ -79,3 +84,5 @@ Generate DBeaver license
   -v, --version=<productVersion>
                              Product version, default is 24
 ```
+
+首次倒入注册码时，建议通过命令行启动 dbeaver，这样可以看到详细的日志信息，方便排查问题。
