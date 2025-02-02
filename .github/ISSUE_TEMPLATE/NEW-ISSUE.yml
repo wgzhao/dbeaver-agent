@@ -4,7 +4,6 @@ title: "[Bug]: "
 labels: [ "bug", "triage" ]
 assignees:
   - wgzhao
-blank_issues_enabled: false
 body:
   - type: markdown
     attributes:
