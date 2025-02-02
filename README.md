@@ -29,7 +29,7 @@
 > 但还是推荐放到安装目录
 
 修改 DBeaver 安装目录的 `dbeaver.ini` 给他加点参数
-在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}`
+在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}` 以及 `-Xbootclasspath/a:{你的jar路径}`
 就像这样
 
 ```ini
@@ -39,6 +39,7 @@ plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
 plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
 -vmargs
 -javaagent:/usr/share/dbeaver/dbeaver-agent.jar
+-Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
 -XX:+IgnoreUnrecognizedVMOptions
 --add-modules=ALL-SYSTEM
 -Dosgi.requiredJavaVersion=11

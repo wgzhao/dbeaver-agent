@@ -25,7 +25,7 @@ Simply build the project using `mvn package`. The generated `dbeaver-agent.jar` 
 
 > However, it is recommended to place it in the installation directory.
 
-Modify the `dbeaver.ini` file in the DBeaver installation directory to add some parameters. Add `-javaagent:{your jar path}` right below the `-vmargs` line, like this:
+Modify the `dbeaver.ini` file in the DBeaver installation directory to add some parameters. Add `-javaagent:{your jar path}` and `-Xbootclasspath/a:{your jar path}` right below the `-vmargs` line, like this:
 
 ```ini
 -startup
@@ -34,6 +34,7 @@ plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
 plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
 -vmargs
 -javaagent:/usr/share/dbeaver/dbeaver-agent.jar
+-Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
 -XX:+IgnoreUnrecognizedVMOptions
 --add-modules=ALL-SYSTEM
 -Dosgi.requiredJavaVersion=11
