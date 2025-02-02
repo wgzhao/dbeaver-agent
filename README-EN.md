@@ -5,6 +5,7 @@ This branch is specifically for version `24.x`. For other lower versions, please
 
 ## Supported Versions
 
+- `24.3`
 - `24.2`
 - `24.1.x`
 - `24.0.x`
