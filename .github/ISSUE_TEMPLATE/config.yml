@@ -4,6 +4,7 @@ title: "[Bug]: "
 labels: [ "bug", "triage" ]
 assignees:
   - wgzhao
+blank_issues_enabled: false
 body:
   - type: markdown
     attributes:
@@ -27,13 +28,14 @@ body:
       value: "24.2 EE"
     validations:
       required: true
-  - type: boolean
+  - type: checkboxes
     id: replace-jre
     attributes:
       label: Have you tried replacing the JRE? (JRE 是否已经替换过)
       description:  You should replace the built-in jre folder（需要替换 DBeaver 程序自带的 jre 文件夹）
-      placeholder: Yes
-      value: "false"
+      options:
+        - label: 已经替换
+          required: true
   - type: dropdown
     id: os
     attributes:
