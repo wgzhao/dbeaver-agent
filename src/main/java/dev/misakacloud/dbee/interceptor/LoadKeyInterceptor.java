@@ -1,6 +1,7 @@
 package dev.misakacloud.dbee.interceptor;
 
 
+import dev.misakacloud.dbee.utils.LogUtils;
 import dev.misakacloud.dbee.utils.MyCryptKey;
 import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
@@ -14,6 +15,7 @@ public class LoadKeyInterceptor {
 
     @RuntimeType
     public static Object intercept(@Origin Method method, @SuperCall Callable<?> callable) throws Exception {
+        LogUtils.debug("===============LoadKeyInterceptor.intercept===============");
         return new MyCryptKey().getPublicKey();
 //            return callable.call();
     }
