@@ -17,7 +17,7 @@ public final class LogUtils {
     private static final String logFile = "d:/dbeaver-agent-logs.txt";
     private static final Charset utf8 = StandardCharsets.UTF_8;
 
-    private static final boolean writeToFile = true;
+    private static final boolean writeToFile = false;
     private static final boolean writeToUDP = false;
 
     public static void initialize() {
