@@ -48,3 +48,16 @@ jobs:
             release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: |
+          mvn deploy:deploy-file \
+            -DgroupId=com.github.wgzhao \
+            -DartifactId=dbeaver-agent \
+            -Dversion=${{ steps.get_version.outputs.VERSION }} \
+            -Dpackaging=jar \
+            -Dfile=release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/wgzhao/dbeaver-agent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
