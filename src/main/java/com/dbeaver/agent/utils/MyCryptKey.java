@@ -1,5 +1,4 @@
-package dev.misakacloud.dbee.utils;
-
+package com.dbeaver.agent.utils;
 
 import java.security.Key;
 import java.security.KeyFactory;
@@ -11,8 +10,9 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 
-public class MyCryptKey {
-    public static  String RSA_PRIVATE_KEY =    "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDG+OYD6GRjeTBd\n" +
+public class MyCryptKey
+{
+    public static String RSA_PRIVATE_KEY = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDG+OYD6GRjeTBd\n" +
             "HgJLfAfvBgJaFXNud+DvP9/UvIiMtnTKhYJZ634QDx0Vh0O1lWykfq/KbnuxgjmT\n" +
             "f2Wl006sFuGF1eDuwxkPBYBuoBEF4K8rmB+jvq3jSHB+KzrHgYozVCib1osKI+Qp\n" +
             "3KYY0AXiKNREGB9EGSRfFH9ydyVIGlguPtAd4iMg0Bigzb9+SIh6hNh+ZRtthjtd\n" +
@@ -41,32 +41,36 @@ public class MyCryptKey {
 
     public byte[] localKeyBytes;
 
-
-    public MyCryptKey() throws Exception {
+    public MyCryptKey()
+            throws Exception
+    {
         String privateKeyStr = RSA_PRIVATE_KEY.replaceAll("\\n", "").trim();
         this.localKeyBytes = Base64.getDecoder().decode(privateKeyStr.getBytes());
     }
 
-
-    public Key getPublicKey() {
+    public Key getPublicKey()
+    {
         try {
             PrivateKey myPrivateKey = (PrivateKey) getPrivateKey();
             RSAPrivateCrtKey privk = (RSAPrivateCrtKey) myPrivateKey;
             RSAPublicKeySpec publicKeySpec = new RSAPublicKeySpec(privk.getModulus(), privk.getPublicExponent());
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             return keyFactory.generatePublic(publicKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        }
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Key getPrivateKey() {
+    public Key getPrivateKey()
+    {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(localKeyBytes);
             return keyFactory.generatePrivate(privateKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        }
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;

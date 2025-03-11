@@ -1,5 +1,4 @@
-package dev.misakacloud.dbee.utils;
-
+package com.dbeaver.agent.utils;
 
 import java.security.Key;
 import java.security.KeyFactory;
@@ -8,7 +7,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
-public class OriginalCryptKey {
+public class OriginalCryptKey
+{
     public static String DBEAVER_UE_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk7ciFU" +
             "/aUCIgH5flBbGD0t7B3KOmfL0l\n" +
             "BMf2ENuLA0w/T8A1RvteUYk2EQo3UrZ7kMZ8rK93nmDjituN7jlv/bsxGyAox87BbKYSs9oH5f9P\n" +
@@ -37,8 +37,9 @@ public class OriginalCryptKey {
     public byte[] localDBeaverEeKeyBytes;
     public byte[] localCloudBeaverEeKeyBytes;
 
-
-    public OriginalCryptKey() throws Exception {
+    public OriginalCryptKey()
+            throws Exception
+    {
         String dBeaverUePublicKeyStr = DBEAVER_UE_PUBLIC_KEY.replaceAll("\\n", "").trim();
         this.localDBeaverUeKeyBytes = Base64.getDecoder().decode(dBeaverUePublicKeyStr.getBytes());
         String dBeaverEePublicKeyStr = DBEAVER_EE_PUBLIC_KEY.replaceAll("\\n", "").trim();
@@ -47,38 +48,42 @@ public class OriginalCryptKey {
         this.localCloudBeaverEeKeyBytes = Base64.getDecoder().decode(cloudBeaverEePublicKeyStr.getBytes());
     }
 
-
-    public Key getDBeaverUePublicKey() {
+    public Key getDBeaverUePublicKey()
+    {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(localDBeaverUeKeyBytes);
             return keyFactory.generatePublic(publicKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        }
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Key getDBeaverEePublicKey() {
+    public Key getDBeaverEePublicKey()
+    {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(localDBeaverEeKeyBytes);
             return keyFactory.generatePublic(publicKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        }
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Key getCloudBeaverEePublicKey() {
+    public Key getCloudBeaverEePublicKey()
+    {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(localCloudBeaverEeKeyBytes);
             return keyFactory.generatePublic(publicKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        }
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;
     }
-
 }

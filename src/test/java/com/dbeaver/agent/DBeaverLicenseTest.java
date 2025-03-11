@@ -1,7 +1,7 @@
-package dev.misakacloud.dbee;
+package com.dbeaver.agent;
 
-import dev.misakacloud.dbee.utils.MyCryptKey;
-import dev.misakacloud.dbee.utils.OriginalCryptKey;
+import com.dbeaver.agent.utils.MyCryptKey;
+import com.dbeaver.agent.utils.OriginalCryptKey;
 import com.dbeaver.lm.api.LMEncryption;
 import com.dbeaver.lm.api.LMLicense;
 import com.dbeaver.lm.api.LMLicenseType;

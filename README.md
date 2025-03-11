@@ -1,75 +1,83 @@
 [English](README-EN.md)
 
-# DBeaver Agent for 24.x
+# DBeaver Agent for 25.x
 
-该分支该针对 `24.x` 版本，其他低版本可以参考 `master` 分支
+该分支针对 `25.x` 版本，若需参考 `24.x`版本，请查看 [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) 分支，其他低版本则请参考 `master` 分支。
 
 ## 支持的版本
 
-- `24.3`
-- `24.2`
-- `24.1.x`
-- `24.0.x`
+- `25.0`
 
 ## 依赖
 
-由于单元测试使用了来自 DBeaver 的代码,所以你需要准备好 DBeaver 的一些包
-把下列的包放入到 libs 文件夹
+为了运行单元测试，需要准备 DBeaver 的以下包，并将其放置于 `libs` 文件夹：
 
-- `com.dbeaver.ee.runtime` 基础运行时,获取密钥等信息在里面
-- `com.dbeaver.lm.api` 许可核心
-- `org.jkiss.utils` 提供一些组件供许可生成
-- 对于 DbeaverUltimate 其公钥位于 `com.dbeaver.app.ultimate`
-- 对于 Cloudeaver 其公钥位于 `io.cloudbeaver.product.ee`
+- `com.dbeaver.ee.runtime`: 基础运行时，包含获取密钥等信息所需的组件
+- `com.dbeaver.lm.api`: 用于许可管理的核心库
+- `org.jkiss.utils`: 提供一些用于许可生成的工具组件
+- 对于 DBeaver Ultimate，公钥位于 `com.dbeaver.app.ultimate`
+- 对于 CloudBeaver，公钥位于 `io.cloudbeaver.product.ee`
 
-## 怎么用?
+## 使用说明
 
-首先执行 `mvn package` 来构建项目，生成 `target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar` 文件
+### 1. 构建项目
 
-然后将生成的 `dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar` 放到任何你喜欢的地方（比如 `/usr/share/dbeaver/dbeaver-agent.jar`）
+首先，使用 Maven 构建项目，生成包含所有依赖的 jar 文件：
 
-```shell
-cp target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+```bash
+mvn package
 ```
 
-> 但还是推荐放到安装目录
+生成的文件路径为 `target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar`。
 
-修改 DBeaver 安装目录的 `dbeaver.ini` 给他加点参数
-在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}` 以及 `-Xbootclasspath/a:{你的jar路径}`
-就像这样
+### 2. 安装 DBeaver Agent
+
+将生成的 jar 文件移动到 DBeaver 的安装路径下（推荐）：
+
+```shell
+cp target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+```
+
+### 3. 配置 DBeaver
+
+修改 DBeaver 安装目录下的 `dbeaver.ini` 文件，添加以下参数：
 
 ```ini
--startup
-plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
---launcher.library
-plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
 -vmargs
 -javaagent:/usr/share/dbeaver/dbeaver-agent.jar
--Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
--XX:+IgnoreUnrecognizedVMOptions
---add-modules=ALL-SYSTEM
--Dosgi.requiredJavaVersion=11
--Xms128m
--Xmx2048m
+-Xbootclasspath/a: /usr/share/dbeaver/dbeaver-agent.jar
 ```
 
-最后，删除 DBeaver 自带的 jre 文件夹， 如果你系统默认的 JRE 就是 17 的话，且能在系统路径中找到，那就不用做其他操作。否则你需要把你安装的 JRE 17 拷贝到 DBeaver 安装目录下，和它自带的 jre 文件夹同级。
-如果是非 Windows 系统，你也可以采取软链接的方式。
+请确保这些参数放置在 `-vmargs` 下方。
 
+### 4. 处理 JRE 依赖
 
-## 生成密钥
+如果您使用的是 JRE 21，且该 JRE 可以在系统路径中找到，那么不需要额外操作。如果默认 JRE 版本不为 21，请将安装的 JRE 拷贝到 DBeaver 安装目录，使其与自带的 jre 文件夹同级。非 Windows
+系统也可以使用软链接。
 
-现已支持命令行生成密钥，运行方式如下：
+### 5. 屏蔽 `stats.dbeaver.com` 域名
+
+为了避免 DBeaver 向 `stats.dbeaver.com` 发送数据，可以通过修改 hosts 文件的方式屏蔽该域名。在 hosts 文件中添加以下内容：
 
 ```shell
-java -cp libs/\*:./target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar \
-    dev.misakacloud.dbee.License
+127.0.0.1 stats.dbeaver.com
 ```
-默认生成的密钥是针对 `Dbeaver Enterprise Edition 24.0`，如果需要其他类型的密钥，可以使用下面的参数来指定
+
+## 生成许可证密钥
+
+现在，您可以通过命令行生成许可证密钥，运行以下命令：
 
 ```shell
-java -cp libs/\*:./target/dbeaver-agent-1.0-SNAPSHOT-jar-with-dependencies.jar \
-    dev.misakacloud.dbee.License -h
+java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
+    com.dbeaver.agent.License
+```
+
+此命令默认生成针对 `DBeaver Enterprise Edition 25.0` 的密钥。
+如果需要生成其他类型的密钥，可以通过以下参数进行指定：
+
+```shell
+java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
+    com.dbeaver.agent.License -h
 
 Usage: gen-license [-h] [-p=<productName>] [-t=<licenseType>]
                    [-v=<productVersion>]
@@ -82,7 +90,16 @@ Generate DBeaver license
                                Enterprise version(ee) or Ultimate version(ue)
                                default is ue
   -v, --version=<productVersion>
-                             Product version, default is 24
+                             Product version, default is 25
 ```
 
-首次倒入注册码时，建议通过命令行启动 dbeaver，这样可以看到详细的日志信息，方便排查问题。
+## 初次导入注册码
+
+首次导入注册码时，建议从命令行启动 DBeaver，以便于观察详细的日志信息，并帮助排查问题。
+
+```shell
+# 示例命令启动 DBeaver
+/path/to/dbeaver/dbeaver
+```
+
+如需更多帮助，请寻求社区支持或参考官方文档。

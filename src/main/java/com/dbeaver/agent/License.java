@@ -1,4 +1,4 @@
-package dev.misakacloud.dbee;
+package com.dbeaver.agent;
 
 import com.dbeaver.lm.api.LMEncryption;
 import com.dbeaver.lm.api.LMLicense;
@@ -6,7 +6,7 @@ import com.dbeaver.lm.api.LMLicenseType;
 import com.dbeaver.lm.api.LMProduct;
 import com.dbeaver.lm.api.LMProductType;
 import com.dbeaver.lm.api.LMUtils;
-import dev.misakacloud.dbee.utils.MyCryptKey;
+import com.dbeaver.agent.utils.MyCryptKey;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -17,23 +17,27 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
-@Command(name="gen-license", mixinStandardHelpOptions = true, version = "gen-license 1.0",
+@Command(name = "gen-license", mixinStandardHelpOptions = true, version = "gen-license 1.0",
         description = "Generate DBeaver license")
-public class License implements Callable<Integer>
+public class License
+        implements Callable<Integer>
 {
-    @Option(names= {"-h", "--help"}, usageHelp = true)
+    @Option(names = {"-h", "--help"}, usageHelp = true)
     private boolean helpRequested = false;
 
-    @Option(names={"-p", "--product"}, defaultValue="dbeaver", description = "Product name, you can choose dbeaver or cloudbeaver, default is ${DEFAULT-VALUE}")
+    @Option(names = {"-p", "--product"}, defaultValue = "dbeaver", description = "Product name, you can choose dbeaver or cloudbeaver, default is ${DEFAULT-VALUE}")
     private String productName;
 
-    @Option(names={"-t", "--type"}, defaultValue = "ue", description = "License type, you can choose Lite version(le),  Enterprise version(ee) or Ultimate version(ue) default is ${DEFAULT-VALUE}")
+    @Option(names = {"-t",
+            "--type"}, defaultValue = "ue", description = "License type, you can choose Lite version(le),  Enterprise version(ee) or Ultimate version(ue) default is ${DEFAULT-VALUE}")
     private String licenseType;
 
-    @Option(names={"-v", "--version"}, defaultValue = "24", description = "Product version, default is 24")
+    @Option(names = {"-v", "--version"}, defaultValue = "25", description = "Product version, default is 25")
     private int productVersion;
 
-    private void genLicense() throws Exception {
+    private void genLicense()
+            throws Exception
+    {
         MyCryptKey myCryptKey = new MyCryptKey();
         PrivateKey privateKey = (PrivateKey) myCryptKey.getPrivateKey();
         // 需要注意的是,这里 id 是不一样的 终极版叫 dbeaver-ue
