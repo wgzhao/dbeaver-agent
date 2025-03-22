@@ -72,6 +72,13 @@ java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar 
     com.dbeaver.agent.License
 ```
 
+如果是 Windows 用户，则命令可能如下：
+
+```shell
+java -cp libs\*;.\target\dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
+    com.dbeaver.agent.License
+```
+
 此命令默认生成针对 `DBeaver Enterprise Edition 25.0` 的密钥。
 如果需要生成其他类型的密钥，可以通过以下参数进行指定：
 

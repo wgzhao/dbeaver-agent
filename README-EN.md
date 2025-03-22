@@ -73,6 +73,13 @@ java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar 
     com.dbeaver.agent.License
 ```
 
+If you are a Windows user, the command might look like this:
+
+```shell
+java -cp libs\*;.\target\dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
+    com.dbeaver.agent.License
+```
+
 This command will generate a license key for the DBeaver Enterprise Edition 25.0 by default. If you need to generate keys for other types, you can specify using the following
 parameters:
 
