@@ -2,6 +2,8 @@
 
 # DBeaver Agent for 25.x
 
+<img width="441" alt="image" src="https://github.com/user-attachments/assets/9ec8ca88-64ac-4e54-9a7c-dbed1480766d" />
+
 该分支针对 `25.x` 版本，若需参考 `24.x`版本，请查看 [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) 分支，其他低版本则请参考 `master` 分支。
 
 ## 支持的版本
