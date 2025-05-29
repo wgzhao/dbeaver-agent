@@ -47,7 +47,7 @@ cp target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeav
 ```ini
 -vmargs
 -javaagent:/usr/share/dbeaver/dbeaver-agent.jar
--Xbootclasspath/a: /usr/share/dbeaver/dbeaver-agent.jar
+-Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
 ```
 
 请确保这些参数放置在 `-vmargs` 下方。
