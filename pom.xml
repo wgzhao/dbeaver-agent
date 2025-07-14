@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dbeaver.agent</groupId>
     <artifactId>dbeaver-agent</artifactId>
-    <version>25.0-SNAPSHOT</version>
+    <version>25.1</version>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
         <bytebuddy.version>1.17.2</bytebuddy.version>
     </properties>
 
@@ -32,7 +32,7 @@
             <artifactId>com.dbeaver.lm.api</artifactId>
             <version>3.0.4-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/com.dbeaver.lm.api_3.0.4.202503110504.jar</systemPath>
+            <systemPath>${project.basedir}/libs/com.dbeaver.lm.api_3.0.9.202506090822.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -40,7 +40,7 @@
             <artifactId>utils</artifactId>
             <version>2.4.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/org.jkiss.utils_2.4.0.202503110504.jar</systemPath>
+            <systemPath>${project.basedir}/libs/org.jkiss.utils_2.4.0.202506090822.jar</systemPath>
         </dependency>
 
         <dependency>

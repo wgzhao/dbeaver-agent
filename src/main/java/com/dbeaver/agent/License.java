@@ -53,6 +53,16 @@ public class License
         String licenseID = LMUtils.generateLicenseId(product);
         String productID = product.getId();
         String productVersion = product.getVersion();
+        byte[] licenseData = getLicenseData(licenseID, productID, productVersion);
+        byte[] licenseEncrypted = LMEncryption.encrypt(licenseData, privateKey);
+        System.out.println("--- " + productId + "(v" + productVersion + ") LICENSE ---");
+        System.out.println(Base64.getEncoder().encodeToString(licenseEncrypted));
+        System.out.println("--- 请复制上一行 ---");
+    }
+
+    private static byte[] getLicenseData(String licenseID, String productID, String productVersion)
+            throws NoSuchFieldException, IllegalAccessException
+    {
         String ownerID = "080601";
         String ownerCompany = "example.com";
         String ownerName = "owner";
@@ -74,11 +84,7 @@ public class License
         Field yearsNumberField = license.getClass().getDeclaredField("yearsNumber");
         yearsNumberField.setAccessible(true);
         yearsNumberField.set(license, (byte) 127);
-        byte[] licenseData = license.getData();
-        byte[] licenseEncrypted = LMEncryption.encrypt(licenseData, privateKey);
-        System.out.println("--- " + productId + "(v" + productVersion + ") LICENSE ---");
-        System.out.println(Base64.getEncoder().encodeToString(licenseEncrypted));
-        System.out.println("--- 请复制上一行 ---");
+        return license.getData();
     }
 
     public static void main(String[] args)
