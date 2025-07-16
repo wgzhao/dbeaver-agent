@@ -107,12 +107,12 @@ For easier use, a cross-platform graphical user interface is now available:
 
 **On Windows:**
 ```cmd
-gen-license-ui.bat
+start-ui.bat
 ```
 
 **On Linux/macOS:**
 ```bash
-./gen-license-ui.sh
+./start-ui.sh
 ```
 
 #### GUI Features

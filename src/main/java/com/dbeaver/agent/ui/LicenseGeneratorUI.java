@@ -2,8 +2,32 @@ package com.dbeaver.agent.ui;
 
 import com.dbeaver.agent.License;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
+import javax.swing.UIManager;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +38,8 @@ import java.io.PrintStream;
 /**
  * Platform-dependent UI for DBeaver license generation
  */
-public class LicenseGeneratorUI extends JFrame {
+public class LicenseGeneratorUI extends JFrame
+{
     private JComboBox<String> productComboBox;
     private JComboBox<String> licenseTypeComboBox;
     private JTextField versionField;
@@ -33,7 +58,7 @@ public class LicenseGeneratorUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Create main panel
+        // Create the main panel
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -259,7 +284,7 @@ public class LicenseGeneratorUI extends JFrame {
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
                 statusLabel.setText("License copied to clipboard!");
                 
-                // Reset status message after 3 seconds
+                // Reset a status message after 3 seconds
                 Timer timer = new Timer(3000, evt -> statusLabel.setText("Ready to generate license..."));
                 timer.setRepeats(false);
                 timer.start();
@@ -277,7 +302,7 @@ public class LicenseGeneratorUI extends JFrame {
             try {
                 new LicenseGeneratorUI().setVisible(true);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, 
+                JOptionPane.showMessageDialog(null,
                     "Error starting License Generator UI: " + e.getMessage(), 
                     "Error", 
                     JOptionPane.ERROR_MESSAGE);

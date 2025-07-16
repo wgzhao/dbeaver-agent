@@ -103,12 +103,12 @@ Generate DBeaver license
 
 **在 Windows 上：**
 ```cmd
-gen-license-ui.bat
+start-ui.bat
 ```
 
 **在 Linux/macOS 上：**
 ```bash
-./gen-license-ui.sh
+./start-ui.sh
 ```
 
 #### GUI 特性

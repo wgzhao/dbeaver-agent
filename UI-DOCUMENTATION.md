@@ -39,7 +39,7 @@ gen-license-ui.bat
 
 #### On Linux/macOS:
 ```bash
-./gen-license-ui.sh
+./start-ui.sh
 ```
 
 ### Generating a License
@@ -108,8 +108,8 @@ src/test/java/com/dbeaver/agent/ui/
 ├── LicenseGeneratorUITest.java      # UI component tests
 └── LicenseGeneratorUIIntegrationTest.java  # Integration tests
 
-gen-license-ui.sh                    # Unix launcher script
-gen-license-ui.bat                   # Windows launcher script
+start-ui.sh                    # Unix launcher script
+start-ui.bat                   # Windows launcher script
 ```
 
 ## Benefits
