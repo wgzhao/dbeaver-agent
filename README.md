@@ -61,6 +61,8 @@ cp target/dbeaver-agent-25.1-jar-with-dependencies.jar /usr/share/dbeaver/dbeave
 
 ## 生成许可证密钥
 
+### 命令行界面 (CLI)
+
 现在，您可以通过命令行生成许可证密钥，运行以下命令：
 
 ```shell
@@ -92,6 +94,32 @@ Generate DBeaver license
   -v, --version=<productVersion>
                              Product version, default is 25
 ```
+
+### 图形用户界面 (GUI)
+
+为了更方便的使用，现在提供了跨平台的图形用户界面：
+
+#### 启动 GUI
+
+**在 Windows 上：**
+```cmd
+gen-license-ui.bat
+```
+
+**在 Linux/macOS 上：**
+```bash
+./gen-license-ui.sh
+```
+
+#### GUI 特性
+
+- **平台原生外观**：在不同操作系统上显示相应的原生界面风格
+- **简单易用**：下拉菜单选择产品和许可类型，文本框输入版本号
+- **即时反馈**：状态栏显示操作进度和结果
+- **一键复制**：生成许可证后可直接复制到剪贴板
+- **错误处理**：输入验证和友好的错误提示
+
+更多关于 GUI 的详细信息，请参阅 [UI-DOCUMENTATION.md](UI-DOCUMENTATION.md)。
 
 ## 初次导入注册码
 
