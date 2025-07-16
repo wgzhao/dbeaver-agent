@@ -66,34 +66,64 @@ To prevent DBeaver from sending data to stats.dbeaver.com, you can block the dom
 
 ## Generate License Key
 
+### Command Line Interface (CLI)
+
 Now, you can generate a license key via the command line by running the following command:
 
 ```bash
-java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
-    com.dbeaver.agent.License
+bash ./gen-license.sh
 ```
 
 If you are a Windows user, the command might look like this:
 
-```shell
-java -cp libs\*;.\target\dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
-    com.dbeaver.agent.License
+```cmd
+gen-license.bat
 ```
 
-This command will generate a license key for the DBeaver Enterprise Edition 25.0 by default. If you need to generate keys for other types, you can specify using the following
-parameters:
+This command will generate a license key for the DBeaver Enterprise Edition 25.1 by default. If you need to generate keys for other types, you can specify using the following parameters:
 
 ```shell
-java -cp libs/\*:./target/dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar \
-com.dbeaver.agent.License -h
+sh gen-license.sh -h
 
-Usage: gen-license [-h] [-p=<productName>] [-t=<licenseType>] [-v=<productVersion>]
+Usage: gen-license [-h] [-p=<productName>] [-t=<licenseType>]
+                   [-v=<productVersion>]
 Generate DBeaver license
--h, --help                   Show help information
--p, --product=<productName>  Optional: Specify product name, options include dbeaver or cloudbeaver, default is dbeaver
--t, --type=<licenseType>     Optional: Specify license type, options include Lite version(le), Enterprise version(ee) or Ultimate version(ue), default is ue
--v, --version=<productVersion> Optional: Specify product version, default is 25
+  -h, --help
+  -p, --product=<productName>
+                             Product name, you can choose dbeaver or
+                               cloudbeaver, default is dbeaver
+  -t, --type=<licenseType>   License type, you can choose Lite version(le),
+                               Enterprise version(ee) or Ultimate version(ue)
+                               default is ue
+  -v, --version=<productVersion>
+                             Product version, default is 25
 ```
+
+### Graphical User Interface (GUI)
+
+For easier use, a cross-platform graphical user interface is now available:
+
+#### Starting the GUI
+
+**On Windows:**
+```cmd
+start-ui.bat
+```
+
+**On Linux/macOS:**
+```bash
+./start-ui.sh
+```
+
+#### GUI Features
+
+- **Platform-native appearance**: Displays appropriate native interface styles on different operating systems
+- **Easy to use**: Dropdown menus for product and license type selection, text field for version input
+- **Instant feedback**: Status bar shows operation progress and results
+- **One-click copy**: Generated license can be directly copied to clipboard
+- **Error handling**: Input validation and friendly error messages
+
+For more detailed information about the GUI, please refer to [UI-DOCUMENTATION.md](UI-DOCUMENTATION.md).
 
 ## First-time License Registration
 
