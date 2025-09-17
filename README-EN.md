@@ -133,3 +133,7 @@ When registering the license for the first time, it is recommended to start DBea
 # Example command to start DBeaver
 /path/to/dbeaver/dbeaver
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wgzhao/dbeaver-agent&type=Date)](https://www.star-history.com/#wgzhao/dbeaver-agent&Date)

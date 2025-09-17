@@ -132,4 +132,6 @@ start-ui.bat
 /path/to/dbeaver/dbeaver
 ```
 
-如需更多帮助，请寻求社区支持或参考官方文档。
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wgzhao/dbeaver-agent&type=Date)](https://www.star-history.com/#wgzhao/dbeaver-agent&Date)
