@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dbeaver.agent</groupId>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
-             <version>${bytebuddy.version}</version>
+            <version>${bytebuddy.version}</version>
         </dependency>
         <dependency>
             <groupId>net.bytebuddy</groupId>
@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.dbeaver.lm</groupId>
-            <artifactId>com.dbeaver.lm.api</artifactId>
+            <artifactId>api</artifactId>
             <version>3.0.4-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/com.dbeaver.lm.api_3.0.9.202506090822.jar</systemPath>
@@ -99,7 +99,7 @@
                         </manifest>
                         <manifestEntries>
                             <Premain-Class>com.dbeaver.agent.Agent</Premain-Class>
-                            <Boot-Class-Path>${artifactId}.jar</Boot-Class-Path>
+                            <Boot-Class-Path>${project.artifactId}.jar</Boot-Class-Path>
                         </manifestEntries>
                     </archive>
                 </configuration>
