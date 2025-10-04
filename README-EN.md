@@ -26,7 +26,7 @@ Use the Python automation script `onekey.py` to complete all configurations with
 # Provide DBeaver installation path as parameter
 python onekey.py "C:\Program Files\DBeaver"           # Windows
 python onekey.py "/Applications/DBeaver.app"          # macOS
-python onekey.py "/usr/share/dbeaver"                       # Linux
+python onekey.py "/usr/share/dbeaver"                 # Linux
 
 # Linux: If DBeaver is installed in a system directory (e.g., /usr/share/dbeaver), use sudo
 sudo python3 onekey.py "/usr/share/dbeaver"

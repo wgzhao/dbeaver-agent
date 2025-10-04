@@ -26,7 +26,7 @@
 # 提供 DBeaver 安装路径作为参数
 python onekey.py "C:\Program Files\DBeaver"           # Windows
 python onekey.py "/Applications/DBeaver.app"          # macOS
-python onekey.py "/usr/share/dbeaver"                       # Linux
+python onekey.py "/usr/share/dbeaver"                 # Linux
 
 # Linux：如果 DBeaver 安装在系统目录（如 /usr/share/dbeaver），需要使用 sudo
 sudo python3 onekey.py "/usr/share/dbeaver"
