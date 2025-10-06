@@ -1,3 +1,8 @@
+/*
+ * LicenseKeyProviderEmbedded#getDecryptionKey 方法拦截器
+ * 用于劫持密钥获取流程，返回自定义公钥。
+ */
+
 package com.dbeaver.agent.interceptor;
 
 import com.dbeaver.agent.utils.MyCryptKey;

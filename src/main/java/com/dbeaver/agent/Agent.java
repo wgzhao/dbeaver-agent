@@ -1,10 +1,13 @@
+/*
+ * DBeaver-EE Java Agent
+ * 负责注册所有 ByteBuddy 拦截器，实现对目标程序关键方法的劫持与替换。
+ * 包括密钥获取、证书校验、License 状态检查等流程。
+ */
+
 package com.dbeaver.agent;
 
-import com.dbeaver.agent.interceptor.CheckCustomerInterceptor;
-import com.dbeaver.agent.interceptor.CheckLicenseInterceptor;
+import com.dbeaver.agent.interceptor.GenericInterceptor;
 import com.dbeaver.agent.interceptor.LoadKeyInterceptor;
-import com.dbeaver.agent.interceptor.PingCheckInterceptor;
-import com.dbeaver.agent.interceptor.PublicLicenseValidatorInterceptor;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
@@ -75,28 +78,26 @@ public class Agent
 
         new AgentBuilder
                 .Default()
-                // 指定需要拦截的类
                 .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicLicenseValidator"))
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) -> builder
                         .method(ElementMatchers.named("validateLicense"))
-                        .intercept(MethodDelegation.to(PublicLicenseValidatorInterceptor.class)))
+                        .intercept(MethodDelegation.to(new GenericInterceptor("VALID: Ok"))))
                 .with(listener)
                 .installOn(inst);
         System.out.println("准备修改验证结果");
         // 验证结果修改
         new AgentBuilder
                 .Default()
-                // 指定需要拦截的类
                 .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicServiceClient"))
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) -> builder
                         .method(ElementMatchers.named("ping"))
-                        .intercept(MethodDelegation.to(PingCheckInterceptor.class))
+                        .intercept(MethodDelegation.to(new GenericInterceptor("pong")))
                         // 拦截 checkCustomerEmail 方法
                         .method(ElementMatchers.named("checkCustomerEmail"))
-                        .intercept(MethodDelegation.to(CheckCustomerInterceptor.class))
+                        .intercept(MethodDelegation.to(new GenericInterceptor("")))
                         // 拦截 checkLicenseStatus 方法
                         .method(ElementMatchers.named("checkLicenseStatus"))
-                        .intercept(MethodDelegation.to(CheckLicenseInterceptor.class)))
+                        .intercept(MethodDelegation.to(new GenericInterceptor("VALID: Ok"))))
                 .with(listener)
                 .installOn(inst);
         System.out.println("验证返回结果修改完成,启动程序");
