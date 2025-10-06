@@ -5,8 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dbeaver.agent</groupId>
     <artifactId>dbeaver-agent</artifactId>
-    <version>25.1</version>
+    <version>25.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <scm>
+        <connection>scm:git:https://github.com/wgzhao/dbeaver-agent</connection>
+        <developerConnection>scm:git:ssh://github.com:wgzhao/dbeaver-agent.git</developerConnection>
+        <url>https://github.com/wgzhao/dbeaver-agent</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
