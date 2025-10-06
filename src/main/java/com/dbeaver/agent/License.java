@@ -1,3 +1,9 @@
+/*
+ * DBeaver License 生成工具
+ * 命令行工具类，用于生成 DBeaver 或 CloudBeaver 的 license 文件。
+ * 与 Java Agent 拦截流程无直接关联。
+ */
+
 package com.dbeaver.agent;
 
 import com.dbeaver.lm.api.LMEncryption;
