@@ -27,7 +27,7 @@ public class CloudBeaverLicenseTest {
                                           "DB",
                                           "CloudBeaver Enterprise",
                                           "CloudBeaver Enterprise Edition",
-                                          "21",
+                                          "24",
                                           LMProductType.SERVER,
                                           new Date(),
                                           new String[0]);
@@ -35,9 +35,9 @@ public class CloudBeaverLicenseTest {
         String productID = product.getId();
         String productVersion = product.getVersion();
         String ownerID = "114514";
-        String ownerCompany = "无";
-        String ownerName = "Null or None";
-        String ownerEmail = "example@example.com";
+        String ownerCompany = "owner";
+        String ownerName = "owner";
+        String ownerEmail = "owner@example.com";
         LMLicense license = new LMLicense(licenseID,
                                           LMLicenseType.ULTIMATE,
                                           new Date(),

@@ -1,0 +1,61 @@
+name: Bug Report
+description: BUG 提交
+title: "[Bug]: "
+labels: [ "bug", "triage" ]
+assignees:
+  - wgzhao
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! （感谢您提交发现的 bug）
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen? （请描述使用中发现的问题）
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running? （当前您使用的DBeaver 版本，这对于定位问题很重要，请选择正确的版本）
+      placeholder: 详细版本号
+      value: "24.2 EE"
+    validations:
+      required: true
+  - type: checkboxes
+    id: replace-jre
+    attributes:
+      label: Have you tried replacing the JRE? (JRE 是否已经替换过)
+      description:  You should replace the built-in jre folder（需要替换 DBeaver 程序自带的 jre 文件夹）
+      options:
+        - label: 已经替换
+          required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS Type
+      description: What Operation System are you seeing the problem on? (发现问题时 Addax 运行在哪个操作系统上)
+      multiple: true
+      options:
+        - MacOS (Default)
+        - Linux
+        - Windows
+  - type: textarea
+    id: dbeaver-ini
+    attributes:
+      label: the content of dbeaver.ini (dbeaver.ini 的内容)
+      description: Please copy and paste the content of dbeaver.ini (请完整的贴出 dbeaver.ini 文件的内容）
+      render: ini
+    validations:
+      required: true
+  - type: textarea
+    id: dbeaver-runtime-log
+    attributes:
+      label: dbeaver runtime log (命令行下运行 dbeaver 的输出内容)
+      description: Please copy and paste the content of running dbeaver in command line  (请完整的在命令行下运行 dbeaver 直到粘贴许可后的完整输出）
+      render: text

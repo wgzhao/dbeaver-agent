@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger only when tags starting with 'v' are pushed
+
+jobs:
+  build-and-release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Rename JAR file
+        run: |
+          mkdir -p release
+          cp target/dbeaver-agent-*-jar-with-dependencies.jar release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: DBeaver Agent ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            # DBeaver Agent ${{ steps.get_version.outputs.VERSION }}
+            
+            ## Supported DBeaver Versions
+            - 25.0
+            
+            ## Installation
+            See README for installation instructions.
+          files: |
+            release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: |
+          mvn deploy:deploy-file \
+            -DgroupId=com.github.wgzhao \
+            -DartifactId=dbeaver-agent \
+            -Dversion=${{ steps.get_version.outputs.VERSION }} \
+            -Dpackaging=jar \
+            -Dfile=release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/wgzhao/dbeaver-agent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

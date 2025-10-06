@@ -1,59 +1,137 @@
-# DBeaver Agent
+[English](README-EN.md)
 
-针对老版本的破解研究在 [老版本](/README-63-70.md)
+# DBeaver Agent for 25.x
 
-新版本在获取密钥上没什么变化,~~老版本 agent 仍然可用~~ 已发布新版 Agent
+<img width="441" alt="image" src="images/v25.2.jpg" />
+<img width="441" alt="image" src="images/v25.1.jpg" />
 
-但是许可生成上有变化,这里我们讨论 Ultimate 版  
-产品 ID 叫做 `dbeaver-ue`  
-通过反射操纵 `LMLicense.yearsNumber` 可以实现修改支持年数,最大为 127  
-如果不使用到期日期,那么就等于永久许可
+该分支针对 `25.1` 和 `25.2` 版本，
 
-剩下的内容看看单元测试 `UltimateLicense` 就知道了
+若需要参考 `25.0` 版本，请查看 [v25.0](https://github.com/wgzhao/dbeaver-agent/tree/v25.0) 分支,  
+若需参考 `24.x`版本，请查看 [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) 分支，  
+其他低版本则请参考 `master` 分支。
 
-## 依赖
+## 支持的版本
 
-由于单元测试使用了来自 DBeaver 的代码,所以你需要准备好 DBeaver 的一些包  
-把下列的包放入到 libs 文件夹
+- `25.2`
+- `25.1`
 
-- `com.dbeaver.ee.runtime` 基础运行时,获取密钥等信息在里面
-- `com.dbeaver.lm.core` 许可核心
-- `org.jkiss.lm` 还是许可核心
-- `org.jkiss.utils` 提供一些组件供许可生成
-- 对于 DbeaverUltimate 其公钥位于 `com.dbeaver.app.ultimate`
-- 对于 Cloudeaver 其公钥位于 `io.cloudbeaver.product.ee`
+## 使用说明
 
-## 怎么用?
+### 1. 构建项目
 
-直接 `mvn package` 构建就可以了.  
-生成的 `dbeaver-agent.jar` 放到任何你喜欢的地方
+首先，使用 Maven 构建项目，生成包含所有依赖的 jar 文件：
 
-> 但还是推荐放到安装目录
-
-修改 DBeaver 安装目录的 `dbeaver.ini` 给他加点参数  
-在 `-vmargs` 下面一行加 `-javaagent:{你的jar路径}`  
-就像这样
-
-```ini
--startup
-plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
---launcher.library
-plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.100.v20210209-1541
--vmargs
--javaagent:/usr/share/dbeaver/dbeaver-agent.jar
--XX:+IgnoreUnrecognizedVMOptions
---add-modules=ALL-SYSTEM
--Dosgi.requiredJavaVersion=11
--Xms128m
--Xmx2048m
+```bash
+mvn clean package
 ```
 
-然后呢,需要删掉 DBeaver 自带的 jre 就好了
+生成的文件路径为 `target/dbeaver-agent-25.1-jar-with-dependencies.jar`。
 
-> 对于 DBeaver >= 20 需要自备 Java11
+### 2. 安装 DBeaver Agent
 
-## 支持版本
+将生成的 jar 文件移动到 DBeaver 的安装路径下（推荐）：
 
-下列是已经测试过的版本:
+```shell
+cp target/dbeaver-agent-25.1-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+```
 
-- 23.0.0
+### 3. 配置 DBeaver
+
+修改 DBeaver 安装目录下的 `dbeaver.ini` 文件，添加以下参数：
+
+```ini
+-vmargs
+-javaagent:/usr/share/dbeaver/dbeaver-agent.jar
+-Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
+```
+
+请确保这些参数放置在 `-vmargs` 下方。
+
+### 4. 处理 JRE 依赖
+
+如果您使用的是 JRE 23，且该 JRE 可以在系统路径中找到，那么不需要额外操作。如果默认 JRE 版本不为 23，请将安装的 JRE 拷贝到 DBeaver 安装目录，使其与自带的 jre 文件夹同级。非 Windows
+系统也可以使用软链接。
+
+### 5. 屏蔽 `stats.dbeaver.com` 域名
+
+为了避免 DBeaver 向 `stats.dbeaver.com` 发送数据，可以通过修改 hosts 文件的方式屏蔽该域名。在 hosts 文件中添加以下内容：
+
+```shell
+127.0.0.1 stats.dbeaver.com
+```
+
+## 生成许可证密钥
+
+### 命令行界面 (CLI)
+
+现在，您可以通过命令行生成许可证密钥，运行以下命令：
+
+```shell
+bash ./gen-license.sh
+```
+
+如果是 Windows 用户，则命令可能如下：
+
+```shell
+gen-license.bat
+```
+
+此命令默认生成针对 `DBeaver Enterprise Edition 25.1` 的密钥。
+如果需要生成其他类型的密钥，可以通过以下参数进行指定：
+
+```shell
+sh gen-license.sh -h
+
+Usage: gen-license [-h] [-p=<productName>] [-t=<licenseType>]
+                   [-v=<productVersion>]
+Generate DBeaver license
+  -h, --help
+  -p, --product=<productName>
+                             Product name, you can choose dbeaver or
+                               cloudbeaver, default is dbeaver
+  -t, --type=<licenseType>   License type, you can choose Lite version(le),
+                               Enterprise version(ee) or Ultimate version(ue)
+                               default is ue
+  -v, --version=<productVersion>
+                             Product version, default is 25
+```
+
+### 图形用户界面 (GUI)
+
+为了更方便的使用，现在提供了跨平台的图形用户界面：
+
+#### 启动 GUI
+
+**在 Windows 上：**
+```cmd
+start-ui.bat
+```
+
+**在 Linux/macOS 上：**
+```bash
+./start-ui.sh
+```
+
+#### GUI 特性
+
+- **平台原生外观**：在不同操作系统上显示相应的原生界面风格
+- **简单易用**：下拉菜单选择产品和许可类型，文本框输入版本号
+- **即时反馈**：状态栏显示操作进度和结果
+- **一键复制**：生成许可证后可直接复制到剪贴板
+- **错误处理**：输入验证和友好的错误提示
+
+更多关于 GUI 的详细信息，请参阅 [UI-DOCUMENTATION.md](UI-DOCUMENTATION.md)。
+
+## 初次导入注册码
+
+首次导入注册码时，建议从命令行启动 DBeaver，以便于观察详细的日志信息，并帮助排查问题。
+
+```shell
+# 示例命令启动 DBeaver
+/path/to/dbeaver/dbeaver
+```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wgzhao/dbeaver-agent&type=Date)](https://www.star-history.com/#wgzhao/dbeaver-agent&Date)
