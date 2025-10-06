@@ -6,7 +6,13 @@
 <img width="439" alt="v25.1" src="images/v25.1.jpg" />
 <img width="600" alt="license generator ui" src="images/license-ui.jpg" />
 
-若需要参考 `25.0` 版本，请查看 [v25.0](https://github.com/wgzhao/dbeaver-agent/tree/v25.0) 分支,  
+## 分支与版本说明
+
+- `master` 分支是当前活跃开发主分支，始终保持最新功能和修复。
+- 每个 tag 名称对应 DBeaver 的具体版本，用户可根据 DBeaver 版本选择对应的 tag。
+- 历史分支和 tag 可用于参考旧版本实现。
+
+若需要参考 `25.0` 版本，请查看 [v25.0](https://github.com/wgzhao/dbeaver-agent/tree/v25.0) 分支。  
 若需参考 `24.x`版本，请查看 [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) 分支，  
 其他低版本则请参考 [v23.0](https://github.com/wgzhao/dbeaver-agent/tree/v23.0)  分支。
 

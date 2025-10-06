@@ -1,9 +1,16 @@
 [中文说明](README.md)
 
-# DBeaver Agent for 25.x
+# DBeaver Agent for updated DBeaver License Key
 
-This branch targets the `25.x` version. If you need to reference the `24.x` version, please see the [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0). For other older
-versions, please refer to the `master` branch.
+## Branches and Versioning
+
+- The `master` branch is the active development branch, always containing the latest features and fixes.
+- Each tag name corresponds to a specific DBeaver version. Users can select the appropriate tag based on their DBeaver version.
+- Historical branches and tags are available for referencing older implementations.
+
+If you need to reference the `25.0` version, please see the [v25.0](https://github.com/wgzhao/dbeaver-agent/tree/v25.0) branch.
+For the `24.x` version, please see the [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) branch.
+For other older versions, please refer to the [v23.0](https://github.com/wgzhao/dbeaver-agent/tree/v23.0) branch.
 
 ## Supported Versions
 
