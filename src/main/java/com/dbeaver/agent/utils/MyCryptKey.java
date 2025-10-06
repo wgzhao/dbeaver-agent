@@ -43,15 +43,14 @@ public class MyCryptKey
             6gMm5dypslijJ8dMPAWdw4gOagH0Nd02P2SaOm4qZ+WeEOhpKvugG84xy6OKeIVn
             08d6j9Ob5iuwVYs7SYZKaO/+q91AbwldnwgNaYneXCxYAj5+MSp82h/0o2cwZtNE
             "KL9lIgIOVNhRnvIMDLfn1Y8=
-            """;
+            """.replaceAll("[^A-Za-z0-9+/=]", "");
 
     public byte[] localKeyBytes;
 
     public MyCryptKey()
             throws Exception
     {
-        String privateKeyStr = RSA_PRIVATE_KEY.replaceAll("\\n", "").trim();
-        this.localKeyBytes = Base64.getDecoder().decode(privateKeyStr.getBytes());
+        this.localKeyBytes = Base64.getDecoder().decode(RSA_PRIVATE_KEY);
     }
 
     public Key getPublicKey()

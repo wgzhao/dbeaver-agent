@@ -1,12 +1,3 @@
-<<<<<<<< HEAD:agent/src/main/java/com/dbeaver/agent/Agent.java
-package com.dbeaver.agent;
-
-import com.dbeaver.agent.interceptor.CheckCustomerInterceptor;
-import com.dbeaver.agent.interceptor.CheckLicenseInterceptor;
-import com.dbeaver.agent.interceptor.LoadKeyInterceptor;
-import com.dbeaver.agent.interceptor.PingCheckInterceptor;
-import com.dbeaver.agent.interceptor.PublicLicenseValidatorInterceptor;
-========
 /*
  * DBeaver-EE Java Agent
  * 负责注册所有 ByteBuddy 拦截器，实现对目标程序关键方法的劫持与替换。
@@ -17,7 +8,6 @@ package com.dbeaver.agent;
 
 import com.dbeaver.agent.interceptor.GenericInterceptor;
 import com.dbeaver.agent.interceptor.LoadKeyInterceptor;
->>>>>>>> 7d90f696c840a8b5a3c596669ea6c55e36ce993d:src/main/java/com/dbeaver/agent/Agent.java
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
@@ -88,10 +78,6 @@ public class Agent
 
         new AgentBuilder
                 .Default()
-<<<<<<<< HEAD:agent/src/main/java/com/dbeaver/agent/Agent.java
-                // 指定需要拦截的类
-========
->>>>>>>> 7d90f696c840a8b5a3c596669ea6c55e36ce993d:src/main/java/com/dbeaver/agent/Agent.java
                 .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicLicenseValidator"))
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) -> builder
                         .method(ElementMatchers.named("validateLicense"))
@@ -102,10 +88,6 @@ public class Agent
         // 验证结果修改
         new AgentBuilder
                 .Default()
-<<<<<<<< HEAD:agent/src/main/java/com/dbeaver/agent/Agent.java
-                // 指定需要拦截的类
-========
->>>>>>>> 7d90f696c840a8b5a3c596669ea6c55e36ce993d:src/main/java/com/dbeaver/agent/Agent.java
                 .type(ElementMatchers.nameContains("com.dbeaver.model.license.validate.PublicServiceClient"))
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) -> builder
                         .method(ElementMatchers.named("ping"))
@@ -120,8 +102,4 @@ public class Agent
                 .installOn(inst);
         System.out.println("验证返回结果修改完成,启动程序");
     }
-<<<<<<<< HEAD:agent/src/main/java/com/dbeaver/agent/Agent.java
 }
-========
-}
->>>>>>>> 7d90f696c840a8b5a3c596669ea6c55e36ce993d:src/main/java/com/dbeaver/agent/Agent.java

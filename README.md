@@ -1,17 +1,16 @@
 [English](README-EN.md)
 
-# DBeaver Agent for 25.x
+# DBeaver Agent for updated DBeaver License Key
 
-<img width="441" alt="image" src="images/v25.2.jpg" />
-<img width="441" alt="image" src="images/v25.1.jpg" />
-
-该分支针对 `25.1` 和 `25.2` 版本，
+<img width="853" alt="v25.2" src="images/v25.2.jpg" />
+<img width="439" alt="v25.1" src="images/v25.1.jpg" />
+<img width="600" alt="license generator ui" src="images/license-ui.jpg" />
 
 若需要参考 `25.0` 版本，请查看 [v25.0](https://github.com/wgzhao/dbeaver-agent/tree/v25.0) 分支,  
 若需参考 `24.x`版本，请查看 [v24.0](https://github.com/wgzhao/dbeaver-agent/tree/v24.0) 分支，  
-其他低版本则请参考 `master` 分支。
+其他低版本则请参考 [v23.0](https://github.com/wgzhao/dbeaver-agent/tree/v23.0)  分支。
 
-## 支持的版本
+## 当前支持的版本
 
 - `25.2`
 - `25.1`

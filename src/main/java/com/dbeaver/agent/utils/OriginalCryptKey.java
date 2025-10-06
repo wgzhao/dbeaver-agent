@@ -21,7 +21,7 @@ public class OriginalCryptKey
             i82UiC5zIk75dx20Al9ql0fdxnzo31q/2MbnNCAfSchsqrKtzBtheex4JvvqZjxn98wk5Te1QgZz
             Caz4ay9dkLVjSt79QYm5hKb8Jt3O5SxSUsrjmYVeG+k2bQlidw8dENwLZmvJkIJi8kb94yEwY/dq
             lENDkQIDAQAB
-            """;
+            """.replaceAll("[^A-Za-z0-9+/=]", "");
 
     public static String DBEAVER_EE_PUBLIC_KEY = """
             MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk7ciFU/aUCIgH5flBbGD0t7B3KOmfL0l
@@ -30,7 +30,7 @@ public class OriginalCryptKey
             i82UiC5zIk75dx20Al9ql0fdxnzo31q/2MbnNCAfSchsqrKtzBtheex4JvvqZjxn98wk5Te1QgZz
             Caz4ay9dkLVjSt79QYm5hKb8Jt3O5SxSUsrjmYVeG+k2bQlidw8dENwLZmvJkIJi8kb94yEwY/dq
             lENDkQIDAQAB
-            """;
+            """.replaceAll("[^A-Za-z0-9+/=]", "");
 
     public static String CLOUDBEAVER_EE_PUBLIC_KEY = """
             MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlAiyH9ghPpqATx/FtCV2o5y6UKDFR+4c
@@ -39,21 +39,17 @@ public class OriginalCryptKey
             QgtvIIwYxno+o+wZ6dLayBG3HrSzDe7Qb7QtpZUsHSjEHekfW15rmp063jpL2wJTIZJXThLsTrT7
             LzXY7cJHg2nh9JjpmOe7udAnaf6zpIeVZSo+zA4cLzuCuZhyDnCfUMpGpcgwGieNIa4bC2YXPu4T
             F7jNpwIDAQAB
-            """;
+            """.replaceAll("[^A-Za-z0-9+/=]", "");
 
     public byte[] localDBeaverUeKeyBytes;
     public byte[] localDBeaverEeKeyBytes;
     public byte[] localCloudBeaverEeKeyBytes;
 
     public OriginalCryptKey()
-            throws Exception
     {
-        String dBeaverUePublicKeyStr = DBEAVER_UE_PUBLIC_KEY.replaceAll("\\n", "").trim();
-        this.localDBeaverUeKeyBytes = Base64.getDecoder().decode(dBeaverUePublicKeyStr.getBytes());
-        String dBeaverEePublicKeyStr = DBEAVER_EE_PUBLIC_KEY.replaceAll("\\n", "").trim();
-        this.localDBeaverEeKeyBytes = Base64.getDecoder().decode(dBeaverEePublicKeyStr.getBytes());
-        String cloudBeaverEePublicKeyStr = CLOUDBEAVER_EE_PUBLIC_KEY.replaceAll("\\n", "").trim();
-        this.localCloudBeaverEeKeyBytes = Base64.getDecoder().decode(cloudBeaverEePublicKeyStr.getBytes());
+        this.localDBeaverUeKeyBytes = Base64.getDecoder().decode(DBEAVER_UE_PUBLIC_KEY);
+        this.localDBeaverEeKeyBytes = Base64.getDecoder().decode(DBEAVER_EE_PUBLIC_KEY);
+        this.localCloudBeaverEeKeyBytes = Base64.getDecoder().decode(CLOUDBEAVER_EE_PUBLIC_KEY);
     }
 
     public Key getDBeaverUePublicKey()

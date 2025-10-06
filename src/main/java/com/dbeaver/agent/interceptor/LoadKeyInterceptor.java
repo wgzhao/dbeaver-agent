@@ -1,11 +1,7 @@
-<<<<<<<< HEAD:agent/src/main/java/com/dbeaver/agent/interceptor/LoadKeyInterceptor.java
-package com.dbeaver.agent.interceptor;
-========
 /*
  * LicenseKeyProviderEmbedded#getDecryptionKey 方法拦截器
  * 用于劫持密钥获取流程，返回自定义公钥。
  */
->>>>>>>> 7d90f696c840a8b5a3c596669ea6c55e36ce993d:src/main/java/com/dbeaver/agent/interceptor/LoadKeyInterceptor.java
 
 package com.dbeaver.agent.interceptor;
 
