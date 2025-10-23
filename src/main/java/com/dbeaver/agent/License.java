@@ -86,6 +86,7 @@ public class License
                 ownerCompany,
                 ownerName,
                 ownerEmail);
+        license.setUsersNumber((short)999);
         // 反射修改 yearsNumber 用来修改支持年份
         Field yearsNumberField = license.getClass().getDeclaredField("yearsNumber");
         yearsNumberField.setAccessible(true);
