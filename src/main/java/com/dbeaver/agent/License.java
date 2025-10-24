@@ -67,7 +67,6 @@ public class License
     }
 
     private static byte[] getLicenseData(String licenseID, String productID, String productVersion)
-            throws NoSuchFieldException, IllegalAccessException
     {
         String ownerID = "080601";
         String ownerCompany = "example.com";
@@ -86,11 +85,8 @@ public class License
                 ownerCompany,
                 ownerName,
                 ownerEmail);
-        license.setUsersNumber((short)999);
-        // 反射修改 yearsNumber 用来修改支持年份
-        Field yearsNumberField = license.getClass().getDeclaredField("yearsNumber");
-        yearsNumberField.setAccessible(true);
-        yearsNumberField.set(license, (byte) 127);
+        license.setUsersNumber((short) 999);
+        license.setYearsNumber((byte) 127);
         return license.getData();
     }
 
