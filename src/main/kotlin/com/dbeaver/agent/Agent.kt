@@ -28,6 +28,7 @@ object Agent {
         install(arg, inst)
     }
 
+    @JvmStatic
     fun install(agentArgs: String?, inst: Instrumentation) {
         println("===============DBeaver-EE Agent===============")
         println("开始进行类替换")
