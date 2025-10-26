@@ -1,22 +1,23 @@
-package com.dbeaver.agent.utils;
+package com.dbeaver.agent.utils
 
-import java.security.Key;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.interfaces.RSAPrivateCrtKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPublicKeySpec;
-import java.util.Base64;
+import java.security.Key
+import java.security.KeyFactory
+import java.security.interfaces.RSAPrivateCrtKey
+import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.RSAPublicKeySpec
+import java.util.*
 
 /*
  * 自定义密钥工具类
  * 用于生成和获取自定义密钥（私钥、公钥），供 Agent 拦截器使用。
+ *
+ * 说明：原实现使用可变构造参数并在 init 中覆盖它，这会产生混淆。
+ * 该类实际上只保存常量密钥数据并根据其生成私钥/公钥，因此使用单例对象更合适。
  */
-public class MyCryptKey
-{
-    public static String RSA_PRIVATE_KEY = """
+object MyCryptKey {
+
+    // 原始 Base64 格式的 PKCS#8 私钥文本（保留原始布局，但会移除非 Base64 字符）
+    private val RSA_PRIVATE_KEY: String = """
             MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDG+OYD6GRjeTBd
             HgJLfAfvBgJaFXNud+DvP9/UvIiMtnTKhYJZ634QDx0Vh0O1lWykfq/KbnuxgjmT
             f2Wl006sFuGF1eDuwxkPBYBuoBEF4K8rmB+jvq3jSHB+KzrHgYozVCib1osKI+Qp
@@ -43,41 +44,33 @@ public class MyCryptKey
             6gMm5dypslijJ8dMPAWdw4gOagH0Nd02P2SaOm4qZ+WeEOhpKvugG84xy6OKeIVn
             08d6j9Ob5iuwVYs7SYZKaO/+q91AbwldnwgNaYneXCxYAj5+MSp82h/0o2cwZtNE
             "KL9lIgIOVNhRnvIMDLfn1Y8=
-            """.replaceAll("[^A-Za-z0-9+/=]", "");
+            
+            """.trimIndent().replace("[^A-Za-z0-9+/=]".toRegex(), "")
 
-    public byte[] localKeyBytes;
+    // 解码后的私钥字节
+    private val localKeyBytes: ByteArray = Base64.getDecoder().decode(RSA_PRIVATE_KEY)
 
-    public MyCryptKey()
-            throws Exception
-    {
-        this.localKeyBytes = Base64.getDecoder().decode(RSA_PRIVATE_KEY);
+    // 懒加载私钥和公钥，避免每次访问都重新解析
+    val privateKey: Key? by lazy {
+        try {
+            val keyFactory = KeyFactory.getInstance("RSA")
+            val privateKeySpec = PKCS8EncodedKeySpec(localKeyBytes)
+            keyFactory.generatePrivate(privateKeySpec)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    public Key getPublicKey()
-    {
+    val publicKey: Key? by lazy {
         try {
-            PrivateKey myPrivateKey = (PrivateKey) getPrivateKey();
-            RSAPrivateCrtKey privk = (RSAPrivateCrtKey) myPrivateKey;
-            RSAPublicKeySpec publicKeySpec = new RSAPublicKeySpec(privk.getModulus(), privk.getPublicExponent());
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            return keyFactory.generatePublic(publicKeySpec);
+            val priv = privateKey as? RSAPrivateCrtKey ?: return@lazy null
+            val publicKeySpec = RSAPublicKeySpec(priv.modulus, priv.publicExponent)
+            val keyFactory = KeyFactory.getInstance("RSA")
+            keyFactory.generatePublic(publicKeySpec)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
-        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Key getPrivateKey()
-    {
-        try {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(localKeyBytes);
-            return keyFactory.generatePrivate(privateKeySpec);
-        }
-        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
