@@ -2,6 +2,7 @@
 
 # DBeaver Agent for updated DBeaver License Key
 
+<img width="853" alt="v25.2" src="images/v25.3.jpg" />
 <img width="853" alt="v25.2" src="images/v25.2.jpg" />
 <img width="439" alt="v25.1" src="images/v25.1.jpg" />
 <img width="600" alt="license generator ui" src="images/license-ui.jpg" />
@@ -18,6 +19,7 @@
 
 ## 当前支持的版本
 
+- `25.3`
 - `25.2`
 - `25.1`
 
@@ -38,7 +40,7 @@ mvn clean package
 将生成的 jar 文件移动到 DBeaver 的安装路径下（推荐）：
 
 ```shell
-cp target/dbeaver-agent-25.1-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+cp target/dbeaver-agent-25.3-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
 ```
 
 ### 3. 配置 DBeaver
@@ -47,8 +49,8 @@ cp target/dbeaver-agent-25.1-jar-with-dependencies.jar /usr/share/dbeaver/dbeave
 
 ```ini
 -vmargs
--javaagent:/usr/share/dbeaver/dbeaver-agent.jar
--Xbootclasspath/a:/usr/share/dbeaver/dbeaver-agent.jar
+-javaagent:/usr/local/share/dbeaver/dbeaver-agent.jar
+-Xbootclasspath/a:/usr/local/share/dbeaver/dbeaver-agent.jar
 ```
 
 请确保这些参数放置在 `-vmargs` 下方。

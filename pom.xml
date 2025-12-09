@@ -36,17 +36,17 @@
         <dependency>
             <groupId>com.dbeaver.lm</groupId>
             <artifactId>com.dbeaver.lm.api</artifactId>
-            <version>3.0.4-SNAPSHOT</version>
+            <version>3.0.24-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/com.dbeaver.lm.api_3.0.9.202506090822.jar</systemPath>
+            <systemPath>${project.basedir}/libs/com.dbeaver.lm.api_3.0.24.202512081242.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.jkiss</groupId>
             <artifactId>utils</artifactId>
-            <version>2.4.0-SNAPSHOT</version>
+            <version>2.5.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/org.jkiss.utils_2.4.0.202506090822.jar</systemPath>
+            <systemPath>${project.basedir}/libs/org.jkiss.utils_2.5.0.202512081242.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -85,9 +85,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>21</release>
-                    <source>21</source>
-                    <target>21</target>
+                    <release>23</release>
+                    <source>23</source>
+                    <target>23</target>
                 </configuration>
             </plugin>
             <plugin>
