@@ -1,8 +1,8 @@
 [English](README-EN.md)
 
 # DBeaver Agent for updated DBeaver License Key
-
-<img width="853" alt="v25.2" src="images/v25.3.jpg" />
+<img width="853" alt="v26.0" src="images/v26.0.jpg" />
+<img width="853" alt="v25.3" src="images/v25.3.jpg" />
 <img width="853" alt="v25.2" src="images/v25.2.jpg" />
 <img width="439" alt="v25.1" src="images/v25.1.jpg" />
 <img width="600" alt="license generator ui" src="images/license-ui.jpg" />
@@ -19,6 +19,7 @@
 
 ## 当前支持的版本
 
+- `26.0`
 - `25.3`
 - `25.2`
 - `25.1`
@@ -33,14 +34,16 @@
 mvn clean package
 ```
 
-生成的文件路径为 `target/dbeaver-agent-25.1-jar-with-dependencies.jar`。
+生成的文件路径为 `target/dbeaver-agent-<version>-jar-with-dependencies.jar`。
+
+或者你可以直接在 releases 页面下载对应版本的 jar 文件：
 
 ### 2. 安装 DBeaver Agent
 
 将生成的 jar 文件移动到 DBeaver 的安装路径下（推荐）：
 
 ```shell
-cp target/dbeaver-agent-25.3-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
+cp target/dbeaver-agent-<version>-jar-with-dependencies.jar /usr/share/dbeaver/dbeaver-agent.jar
 ```
 
 ### 3. 配置 DBeaver
@@ -57,7 +60,7 @@ cp target/dbeaver-agent-25.3-jar-with-dependencies.jar /usr/share/dbeaver/dbeave
 
 ### 4. 处理 JRE 依赖
 
-如果您使用的是 JRE 23，且该 JRE 可以在系统路径中找到，那么不需要额外操作。如果默认 JRE 版本不为 23，请将安装的 JRE 拷贝到 DBeaver 安装目录，使其与自带的 jre 文件夹同级。非 Windows
+如果您使用的是 JRE 21，且该 JRE 可以在系统路径中找到，那么不需要额外操作。如果默认 JRE 版本不为 21，请将安装的 JRE 拷贝到 DBeaver 安装目录，使其与自带的 jre 文件夹同级。非 Windows
 系统也可以使用软链接。
 
 ### 5. 屏蔽 `stats.dbeaver.com` 域名
@@ -84,7 +87,7 @@ bash ./gen-license.sh
 gen-license.bat
 ```
 
-此命令默认生成针对 `DBeaver Enterprise Edition 25.1` 的密钥。
+此命令默认生成针对 `DBeaver Enterprise Edition 26.0` 的密钥。
 如果需要生成其他类型的密钥，可以通过以下参数进行指定：
 
 ```shell
@@ -101,7 +104,7 @@ Generate DBeaver license
                                Enterprise version(ee) or Ultimate version(ue)
                                default is ue
   -v, --version=<productVersion>
-                             Product version, default is 25
+                             Product version, default is 26
 ```
 
 ### 图形用户界面 (GUI)

@@ -6,22 +6,21 @@
 
 package com.dbeaver.agent;
 
+import com.dbeaver.agent.utils.MyCryptKey;
 import com.dbeaver.lm.api.LMEncryption;
 import com.dbeaver.lm.api.LMLicense;
 import com.dbeaver.lm.api.LMLicenseType;
 import com.dbeaver.lm.api.LMProduct;
 import com.dbeaver.lm.api.LMProductType;
 import com.dbeaver.lm.api.LMUtils;
-import com.dbeaver.agent.utils.MyCryptKey;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-
-import java.lang.reflect.Field;
 import java.security.PrivateKey;
 import java.util.Base64;
 import java.util.Date;
 import java.util.concurrent.Callable;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+
 
 @Command(name = "gen-license", mixinStandardHelpOptions = true, version = "gen-license 1.0",
         description = "Generate DBeaver license")
@@ -38,8 +37,8 @@ public class License
             "--type"}, defaultValue = "ue", description = "License type, you can choose Lite version(le),  Enterprise version(ee) or Ultimate version(ue) default is ${DEFAULT-VALUE}")
     private String licenseType;
 
-    @Option(names = {"-v", "--version"}, defaultValue = "25", description = "Product version, default is 25")
-    private int productVersion;
+    @Option(names = {"-v", "--version"}, defaultValue = "26", description = "Product version, default is 26")
+    private String productVersion;
 
     private void genLicense()
             throws Exception

@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '23'
+          java-version: '21'
           cache: maven
 
       - name: Build with Maven
@@ -40,7 +40,7 @@ jobs:
             # DBeaver Agent ${{ steps.get_version.outputs.VERSION }}
             
             ## Supported DBeaver Versions
-            - 25.0
+            - 26.0
             
             ## Installation
             See README for installation instructions.
