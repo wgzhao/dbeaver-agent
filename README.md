@@ -1,11 +1,11 @@
-[English](README-EN.md)
 
 # DBeaver Agent for updated DBeaver License Key
-<img width="853" alt="v26.0" src="images/v26.0.jpg" />
-<img width="853" alt="v25.3" src="images/v25.3.jpg" />
-<img width="853" alt="v25.2" src="images/v25.2.jpg" />
-<img width="439" alt="v25.1" src="images/v25.1.jpg" />
-<img width="600" alt="license generator ui" src="images/license-ui.jpg" />
+
+![dbeaver v26.0](./images/v26.0.jpg)
+![dbeaver v25.3](./images/v25.3.jpg)
+![dbeaver v25.2](./images/v25.2.jpg)
+![dbeaver v25.1](./images/v25.1.jpg)
+![license generator ui](./images/license-ui.jpg)
 
 ## 分支与版本说明
 
@@ -114,11 +114,13 @@ Generate DBeaver license
 #### 启动 GUI
 
 **在 Windows 上：**
+
 ```cmd
 start-ui.bat
 ```
 
 **在 Linux/macOS 上：**
+
 ```bash
 ./start-ui.sh
 ```
