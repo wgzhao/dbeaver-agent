@@ -1,22 +1,6 @@
 package com.dbeaver.agent.ui;
 
 import com.dbeaver.agent.License;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.UIManager;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -27,13 +11,25 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+
+
 
 /**
  * Platform-dependent UI for DBeaver license generation
@@ -227,7 +223,7 @@ public class LicenseGeneratorUI extends JFrame
                         
                         java.lang.reflect.Field productVersionField = License.class.getDeclaredField("productVersion");
                         productVersionField.setAccessible(true);
-                        productVersionField.set(license, Integer.parseInt(version));
+                        productVersionField.set(license, version);
                         
                         // Call the actual license generation method
                         license.call();

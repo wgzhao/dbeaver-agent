@@ -1,11 +1,11 @@
 package com.dbeaver.agent.ui;
 
 import com.dbeaver.agent.License;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * Integration test to verify that the UI components can integrate with the License functionality
@@ -43,7 +43,7 @@ public class LicenseGeneratorUIIntegrationTest {
             
             java.lang.reflect.Field productVersionField = License.class.getDeclaredField("productVersion");
             productVersionField.setAccessible(true);
-            productVersionField.set(license, Integer.parseInt(version));
+            productVersionField.set(license, version);
             
             // Call the actual license generation method
             license.call();
